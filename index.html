@@ -322,17 +322,12 @@
   const status = document.getElementById("statusMsg");
   const btn = document.getElementById("submitBtn");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    status.style.color = "#a9acb8";
-    status.textContent = "Submitting… please wait.";
-
-   form.addEventListener("submit", async (e) => {
+ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   status.style.color = "#a9ac8b";
   status.textContent = "Submitting... please wait.";
 
-  const pref = form.payment_ref.value.trim();
+  const pref = form.payment_ref.value.trim(); // Payment Ref. No field value
   if (!pref) {
     status.style.color = "#ff8b8b";
     status.textContent = "Payment reference number is required.";
@@ -355,7 +350,16 @@
     });
 
     if (res.ok) {
-      window.location.href = `https://wa.me/919345705753?text=UD30%20Payment%20Confirmation%0AName:%20${encodeURIComponent(form.name.value)}%0APhone:%20${encodeURIComponent(form.phone.value)}%0AAmount:%20${encodeURIComponent(form.amount.value)}%0ARef:%20${encodeURIComponent(pref)}%0ANotes:%20${encodeURIComponent(form.notes.value || "-")}`;
+      // Redirect to WhatsApp with payment details
+      const msg = encodeURIComponent(
+        `UD30 Payment Confirmation\n` +
+        `Name: ${form.name.value}\n` +
+        `Phone: ${form.phone.value}\n` +
+        `Amount: ₹${form.amount.value}\n` +
+        `Ref: ${pref}\n` +
+        `Notes: ${form.notes.value || "-"}`
+      );
+      window.location.href = `https://wa.me/919345705753?text=${msg}`;
     } else {
       status.style.color = "#ff8b8b";
       status.textContent = "Submission failed. Please try again.";
@@ -369,43 +373,3 @@
     btn.textContent = "Submit & Continue to WhatsApp";
   }
 });
-
-
-    btn.disabled = true; btn.textContent = "Processing…";
-
-    try{
-      const fd = new FormData(form);
-      fd.append("_replyto", form.email.value.trim());
-      fd.append("source", "FITxYASH Website");
-      fd.append("submitted_at", new Date().toISOString());
-
-      const res = await fetch(FORM_ENDPOINT, { method:"POST", body: fd, headers: { "Accept":"application/json" }});
-      if(!res.ok){
-        const j = await res.json().catch(()=>({}));
-        throw new Error(j.error || "Submission failed. Try again.");
-      }
-
-      status.style.color = "#7affc6";
-      status.textContent = "Submitted! Redirecting to WhatsApp…";
-
-      const enc = encodeURIComponent;
-      const waMsg =
-        `Hi Yashwanth! Payment submitted.%0A` +
-        `Name: ${enc(form.name.value)}%0A` +
-        `Phone: ${enc(form.phone.value)}%0A` +
-        `Program: ${enc(form.program.value)}%0A` +
-        `Amount: ₹${enc(form.amount.value)} (${enc(form.mode.value)})%0A` +
-        `Ref: ${enc(pref)}%0A%0A` +
-        `Please confirm my enrollment.`;
-      const waURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMsg}`;
-      window.location.href = waURL;
-
-    }catch(err){
-      status.style.color = "#ff8b8b";
-      status.textContent = err.message || "Something went wrong.";
-      btn.disabled = false; btn.textContent = "Submit & Continue to WhatsApp";
-    }
-  });
-</script>
-</body>
-</html>
