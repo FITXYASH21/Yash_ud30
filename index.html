@@ -272,21 +272,39 @@
                 <option value="UD30">UD30 — Ultimate 30-Day</option>
                 <option>Fat Loss Accelerator</option><option>Lean Muscle Gain</option><option>Body Recomp</option>
               </select>
-            </div>
-          </div>
-          <div class="grid-2">
-            <div><label>Amount Paid (₹) *</label><input name="amount" type="number" min="1" step="1" required value="499"></div>
-            <div><label>Payment Mode *</label>
-              <select name="mode" required><option>UPI</option><option>Card</option><option>NetBanking</option><option>Wallet</option></select>
-            </div>
-          </div>
-          <div class="grid-2">
-            <div><label>Payment Ref. No *</label><input name="payment_ref" type="text" required placeholder="UPI/Txn ID"></div>
-           
-          <label>Notes (optional)</label><textarea name="message" rows="3" placeholder="Any notes to mentor…"></textarea>
-          <input type="hidden" name="_subject" value="FITxYASH — Payment Confirmation">
-          <input type="hidden" name="_gotcha">
-          <button class="btn" id="submitBtn" type="submit">Submit & Continue to WhatsApp</button>
+            <div class="grid-2">
+  <div>
+    <label>Amount Paid (₹)</label>
+    <input name="amount" type="number" min="1" step="1" required placeholder="Enter amount">
+  </div>
+  <div>
+    <label>Payment Mode</label>
+    <select name="mode" required>
+      <option>UPI</option>
+      <option>Card</option>
+      <option>NetBanking</option>
+    </select>
+  </div>
+</div>
+
+<div class="grid-2">
+  <div>
+    <label>Payment Ref. No</label>
+    <input name="payment_ref" type="text" required placeholder="Enter payment reference">
+  </div>
+</div>
+
+<div>
+  <label>Notes (Optional)</label>
+  <textarea name="message" rows="3" placeholder="Any notes to mention"></textarea>
+</div>
+
+<!-- Instagram Redirect Button -->
+<button class="btn" type="button" onclick="window.location.href='https://www.instagram.com/fitxyash.official?igsh=NzdzZXB2NnM2cjdq&utm_source=qr';">
+  Submit & Continue to Instagram
+</button>
+
+
           <div id="statusMsg" class="note" style="margin-top:8px"></div>
         </form>
       </div>
