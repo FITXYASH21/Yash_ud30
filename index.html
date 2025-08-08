@@ -328,18 +328,49 @@
     status.style.color = "#a9acb8";
     status.textContent = "Submitting… please wait.";
 
-    const shot = form.screenshot.files[0];
-    const pref = form.payment_ref.value.trim();
-    if (!shot || !pref){
+   form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  status.style.color = "#a9ac8b";
+  status.textContent = "Submitting... please wait.";
+
+  const pref = form.payment_ref.value.trim();
+  if (!pref) {
+    status.style.color = "#ff8b8b";
+    status.textContent = "Payment reference number is required.";
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Processing...";
+
+  try {
+    const fd = new FormData(form);
+    fd.append("_replyto", form.email.value.trim());
+    fd.append("source", "FITxYASH Website");
+    fd.append("submitted_at", new Date().toISOString());
+
+    const res = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      body: fd,
+      headers: { "Accept": "application/json" },
+    });
+
+    if (res.ok) {
+      window.location.href = `https://wa.me/919345705753?text=UD30%20Payment%20Confirmation%0AName:%20${encodeURIComponent(form.name.value)}%0APhone:%20${encodeURIComponent(form.phone.value)}%0AAmount:%20${encodeURIComponent(form.amount.value)}%0ARef:%20${encodeURIComponent(pref)}%0ANotes:%20${encodeURIComponent(form.notes.value || "-")}`;
+    } else {
       status.style.color = "#ff8b8b";
-      status.textContent = "Payment screenshot & reference number are required.";
-      return;
+      status.textContent = "Submission failed. Please try again.";
+      btn.disabled = false;
+      btn.textContent = "Submit & Continue to WhatsApp";
     }
-    if (shot.size > 10 * 1024 * 1024){
-      status.style.color = "#ff8b8b";
-      status.textContent = "Screenshot too large (max 10MB).";
-      return;
-    }
+  } catch (err) {
+    status.style.color = "#ff8b8b";
+    status.textContent = "Network error. Please try again.";
+    btn.disabled = false;
+    btn.textContent = "Submit & Continue to WhatsApp";
+  }
+});
+
 
     btn.disabled = true; btn.textContent = "Processing…";
 
