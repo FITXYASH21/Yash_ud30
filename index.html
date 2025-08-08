@@ -3,22 +3,15 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>FITxYASH — Ultimate Transformation</title>
-<meta name="description" content="Transform with FITxYASH. UD30 @ ₹499 covers all kinds of fitness goals." />
+<title>FITxYASH — UD30 Ultimate Transformation Program</title>
+<meta name="description" content="UD30 — Ultimate 30-Day Transformation by FITxYASH. ₹499 only. Limited seats." />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Archivo:wght@700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* Matched to fitx120 dark palette (tweak shades by 1–2% if needed after deploy) */
-    --bg:#0b0c10;
-    --card:#12131a;
-    --text:#f4f6fb;
-    --muted:#a9acb8;
-    --accent:#7af0d9;
-    --accent-2:#4fd1ff;
-    --border:#1f2130;
-    /* Rich heading highlight */
-    --heading:#ffd166;
+    --bg:#0b0c10; --card:#12131a; --text:#f4f6fb; --muted:#a9acb8;
+    --accent:#7af0d9; --accent-2:#4fd1ff; --border:#1f2130; --heading:#ffd166;
+    --success:#7affc6; --danger:#ff8b8b;
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
@@ -27,25 +20,27 @@
   .wrap{max-width:1100px;margin:0 auto;padding:20px}
   header{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
   .logo{display:flex;align-items:center;gap:12px}
-  .logo img{height:56px;width:auto;filter:drop-shadow(0 6px 18px rgba(0,0,0,.4));} /* bigger logo */
-  .logo h1{font-family:Archivo,Inter,system-ui;font-size:28px;margin:0;font-weight:900;letter-spacing:.5px}
+  .logo img{height:64px;width:auto;filter:drop-shadow(0 6px 18px rgba(0,0,0,.4));} /* bigger */
+  .logo h1{font-family:Archivo,Inter;font-size:28px;margin:0;font-weight:900;letter-spacing:.5px}
   nav{display:flex;gap:18px}
-  nav a{opacity:.9}
   .btn{display:inline-block;padding:12px 18px;border-radius:12px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#071013;box-shadow:0 10px 30px rgba(0,0,0,.25)}
   .ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+  .badge{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:12px;color:#cfd3e2}
   .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center;padding:28px 0}
-  .hero h2{font-family:Archivo,Inter,system-ui;margin:0 0 10px;font-size:46px;line-height:1.05;color:var(--heading)}
+  .hero h2{font-family:Archivo,Inter;margin:0 0 10px;font-size:46px;line-height:1.05;color:var(--heading)}
   .hero p{color:var(--muted);margin:0 0 16px}
   .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px}
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
   .section{padding:32px 0}
-  .section h3{font-family:Archivo,Inter,system-ui;font-size:28px;color:var(--heading);margin:0 0 8px}
+  .section h3{font-family:Archivo,Inter;font-size:28px;color:var(--heading);margin:0 0 8px}
   .section p.lead{color:var(--muted);margin:0 0 18px}
   ul.clean{padding:0;margin:0;list-style:none}
   ul.clean li{padding-left:22px;position:relative;margin:10px 0;color:#dfe2ee}
   ul.clean li:before{content:"✓";position:absolute;left:0;top:0;color:var(--accent)}
-
+  /* brand strip */
+  .strip{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  .strip .pill{border:1px solid var(--border);padding:6px 12px;border-radius:999px;color:#cfd3e2;font-size:13px}
   /* Slider */
   .slider{position:relative;overflow:hidden;border-radius:16px}
   .slides{display:flex;gap:16px;animation:scroll 18s linear infinite}
@@ -54,24 +49,28 @@
   .slide .goal{font-size:13px;color:var(--muted);margin-bottom:8px}
   .slide .tag{display:inline-block;font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);margin-top:8px;color:#cfd3e2}
   @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
   /* Programs */
   .program{display:flex;flex-direction:column;gap:10px}
   .program h4{margin:0;font-size:20px}
   .program p{margin:0;color:var(--muted)}
-
   /* UD30 Special */
-  .ud30{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+  .ud30{display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative}
   .price{font-weight:900;font-size:34px;font-family:Archivo,Inter;letter-spacing:1px}
-  .badge{display:inline-block;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:12px;color:#cfd3e2}
-
+  .limited{position:absolute;top:16px;right:16px;background:#1a1c26;border:1px solid var(--border);padding:8px 12px;border-radius:12px}
+  .countdown{font-weight:800}
   /* Mentor */
   .mentor{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
-  .mentor img{width:100%;height:auto;border-radius:16px;border:1px solid var(--border);object-fit:cover}
+  .mentor img{width:100%;height:520px;object-fit:cover;border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,.45)} /* taller premium */
   .mentor h4{margin:0 0 8px}
   .muted{color:var(--muted)}
-
-  /* Payment confirm form */
+  /* Reviews grid */
+  .reviews{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .review{background:#0f1016;border:1px solid var(--border);border-radius:16px;padding:16px}
+  .review .name{font-weight:800}
+  .review .state{font-size:12px;color:#cfd3e2}
+  .stars{margin-top:6px}
+  .stars span{filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))}
+  /* Payment form */
   .confirm{background:#0f1118;border:1px dashed #2a2d3d;border-radius:16px;padding:18px}
   label{display:block;font-weight:600;margin:10px 0 6px}
   input,select,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #2a2b33;background:#0b0e14;color:var(--text)}
@@ -80,12 +79,13 @@
   footer{padding:28px 0;color:#c2c6d6}
   .tiny{font-size:12px;color:#8e93a6}
   .center{text-align:center}
-
   @media (max-width:920px){
     .hero{grid-template-columns:1fr}
     .grid-3{grid-template-columns:1fr}
     .grid-2{grid-template-columns:1fr}
+    .reviews{grid-template-columns:1fr}
     .mentor{grid-template-columns:1fr}
+    .mentor img{height:440px}
   }
 </style>
 </head>
@@ -100,24 +100,31 @@
       <nav>
         <a href="#programs">Programs</a>
         <a href="#clients">Clients</a>
-        <a href="#mentor">Meet your mentor</a>
-        <a class="btn" href="#confirm">Confirm Payment</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#mentor">Mentor</a>
+        <a class="btn" href="#confirm">Join Now</a>
       </nav>
     </header>
 
     <!-- Hero -->
     <section class="hero">
       <div>
-        <h2>build a body you are proud of</h2>
-        <p>Premium online coaching built on proven systems. Your goal — fat loss, muscle gain, or clean recomposition — we’ve got you.</p>
-        <div style="display:flex;gap:12px;margin-top:10px">
-          <a href="#ud30" class="btn">Enroll in UD30 @ ₹499</a>
-          <a href="#confirm" class="btn ghost">Already paid? Confirm here</a>
+        <h2>UD30 — Ultimate Transformation Program</h2>
+        <div class="strip">
+          <span class="pill">JR MR INDIA 2024</span>
+          <span class="pill">50+ Bodybuilding Titles</span>
+          <span class="pill">200+ Clients Trained</span>
+          <span class="pill">7 Years Experience</span>
+        </div>
+        <p style="margin-top:10px">Premium online coaching built on proven systems. Fat loss, muscle gain, or general fitness—everything inside one playbook.</p>
+        <div style="display:flex;gap:12px;margin-top:10px;flex-wrap:wrap">
+          <a href="#confirm" class="btn">Join Now — ₹499</a>
+          <span class="badge">Limited seats</span>
         </div>
       </div>
       <div class="card">
         <ul class="clean">
-          <li>Custom workout & diet aligned to your lifestyle</li>
+          <li>Customized workout & diet to your lifestyle</li>
           <li>Weekly adjustments, accountability & check-ins</li>
           <li>Direct mentor support on WhatsApp</li>
           <li>Supplements & recovery guidance (optional)</li>
@@ -128,7 +135,7 @@
     <!-- Programs (3) -->
     <section id="programs" class="section">
       <h3>Programs</h3>
-      <p class="lead">Choose your path. All programs follow science-based progression & nutrition.</p>
+      <p class="lead">Pick your focus. All paths follow science-based training & nutrition.</p>
       <div class="grid-3">
         <div class="card program">
           <h4>Fat Loss Accelerator</h4>
@@ -151,8 +158,9 @@
     <!-- Special Program UD30 -->
     <section id="ud30" class="section">
       <div class="card ud30">
+        <div class="limited">₹499 ONLY • <span id="countdown" class="countdown">--:--:--</span></div>
         <h3>UD30 — The Ultimate 30-Day Program</h3>
-        <p class="lead">One plan that <b>covers all kinds of fitness</b>. Start strong, stay consistent, see visible changes in 30 days.</p>
+        <p class="lead">One plan that <b>covers all kinds of fitness</b>. Start strong, stay consistent, see visible changes in 30 days. Limited seats—secure yours now.</p>
         <div class="price">₹499</div>
         <ul class="clean">
           <li>Customized plan to your goal (loss / gain / general fitness)</li>
@@ -160,51 +168,53 @@
           <li>Diet chart aligned with your food choices</li>
           <li>WhatsApp support + accountability</li>
         </ul>
-        <a class="btn" href="#confirm">I’ve paid — Confirm now</a>
+        <a class="btn" href="#confirm">Join Now</a>
       </div>
     </section>
 
-    <!-- Clients slider -->
+    <!-- Clients slider (3 showcase) -->
     <section id="clients" class="section">
       <h3>Clients</h3>
       <p class="lead">Real people. Real goals. Different journeys.</p>
       <div class="slider card">
         <div class="slides">
-          <div class="slide">
-            <h4>Arjun</h4>
-            <div class="goal">Goal: Fat Loss</div>
-            <p>Structured deficit + strength retention + walks. Clean, sustainable drop.</p>
-            <span class="tag">Cut Phase</span>
-          </div>
-          <div class="slide">
-            <h4>Prince</h4>
-            <div class="goal">Goal: Muscle Gain</div>
-            <p>Surplus dialed with progressive overload & sleep hygiene.</p>
-            <span class="tag">Lean Bulk</span>
-          </div>
-          <div class="slide">
-            <h4>Sandy</h4>
-            <div class="goal">Goal: General Fitness</div>
-            <p>Mobility + strength + conditioning. Full health upgrade.</p>
-            <span class="tag">Lifestyle Reset</span>
-          </div>
-          <!-- duplicate set for continuous scroll -->
-          <div class="slide">
-            <h4>Arjun</h4><div class="goal">Goal: Fat Loss</div>
-            <p>Structured deficit + strength retention + walks. Clean, sustainable drop.</p>
-            <span class="tag">Cut Phase</span>
-          </div>
-          <div class="slide">
-            <h4>Prince</h4><div class="goal">Goal: Muscle Gain</div>
-            <p>Surplus dialed with progressive overload & sleep hygiene.</p>
-            <span class="tag">Lean Bulk</span>
-          </div>
-          <div class="slide">
-            <h4>Sandy</h4><div class="goal">Goal: General Fitness</div>
-            <p>Mobility + strength + conditioning. Full health upgrade.</p>
-            <span class="tag">Lifestyle Reset</span>
-          </div>
+          <div class="slide"><h4>Arjun</h4><div class="goal">Goal: Fat Loss</div><p>Structured deficit + strength retention + walks. Clean, sustainable drop.</p><span class="tag">Cut Phase</span></div>
+          <div class="slide"><h4>Prince</h4><div class="goal">Goal: Muscle Gain</div><p>Surplus dialed with progressive overload & sleep hygiene.</p><span class="tag">Lean Bulk</span></div>
+          <div class="slide"><h4>Sandy</h4><div class="goal">Goal: General Fitness</div><p>Mobility + strength + conditioning. Full health upgrade.</p><span class="tag">Lifestyle Reset</span></div>
+          <!-- duplicate set -->
+          <div class="slide"><h4>Arjun</h4><div class="goal">Goal: Fat Loss</div><p>Structured deficit + strength retention + walks. Clean, sustainable drop.</p><span class="tag">Cut Phase</span></div>
+          <div class="slide"><h4>Prince</h4><div class="goal">Goal: Muscle Gain</div><p>Surplus dialed with progressive overload & sleep hygiene.</p><span class="tag">Lean Bulk</span></div>
+          <div class="slide"><h4>Sandy</h4><div class="goal">Goal: General Fitness</div><p>Mobility + strength + conditioning. Full health upgrade.</p><span class="tag">Lifestyle Reset</span></div>
         </div>
+      </div>
+    </section>
+
+    <!-- Big Trust Reviews (20) -->
+    <section id="reviews" class="section">
+      <h3>What clients say</h3>
+      <p class="lead">20 recent reviews from across India.</p>
+      <div class="reviews">
+        <!-- each review -->
+        <div class="review"><div class="name">Rohit S. <span class="state">| Maharashtra</span></div><div class="stars">★★★★★</div><p>Clear diet + weekly tweaks. 5.2kg fat loss in 4 weeks. No crash, full energy.</p></div>
+        <div class="review"><div class="name">Akhila P. <span class="state">| Karnataka</span></div><div class="stars">★★★★★</div><p>Steps, protein target, simple meals. Strength increased while dropping inches.</p></div>
+        <div class="review"><div class="name">Karthik R. <span class="state">| Tamil Nadu</span></div><div class="stars">★★★★★</div><p>Muscle gain without fluff. Sleep + training plan nailed. Visible shoulders.</p></div>
+        <div class="review"><div class="name">Ananya G. <span class="state">| West Bengal</span></div><div class="stars">★★★★★</div><p>Office schedule-ku fit aana plan. Consistency easy. Waist -3 inches.</p></div>
+        <div class="review"><div class="name">Vikram T. <span class="state">| Telangana</span></div><div class="stars">★★★★★</div><p>No nonsense guidance. Food choices respected. Loved the accountability.</p></div>
+        <div class="review"><div class="name">Meera V. <span class="state">| Kerala</span></div><div class="stars">★★★★★</div><p>Post-injury comeback plan. Mobility + strength combo—pain free training.</p></div>
+        <div class="review"><div class="name">Harshil M. <span class="state">| Gujarat</span></div><div class="stars">★★★★★</div><p>Recomp worked! Weight same, mirror different. Abs peeking.</p></div>
+        <div class="review"><div class="name">Sanjana D. <span class="state">| Delhi</span></div><div class="stars">★★★★★</div><p>Weekly check-ins kept me honest. Cravings handled smartly.</p></div>
+        <div class="review"><div class="name">Prateek J. <span class="state">| Rajasthan</span></div><div class="stars">★★★★★</div><p>Step-by-step gym plan. First time confident with weights.</p></div>
+        <div class="review"><div class="name">Navya K. <span class="state">| Andhra Pradesh</span></div><div class="stars">★★★★★</div><p>PCOS-friendly tweaks. Inches lost steadily without stress.</p></div>
+        <div class="review"><div class="name">Farhan A. <span class="state">| Uttar Pradesh</span></div><div class="stars">★★★★★</div><p>Protein hacks & simple dal/roti swaps—game changer.</p></div>
+        <div class="review"><div class="name">Ritika S. <span class="state">| Punjab</span></div><div class="stars">★★★★★</div><p>Cardio obsession stopped. Now strong + lean—smart plan.</p></div>
+        <div class="review"><div class="name">Sourav N. <span class="state">| Odisha</span></div><div class="stars">★★★★★</div><p>Recovery focus helped me train harder. PRs every week.</p></div>
+        <div class="review"><div class="name">Isha C. <span class="state">| Haryana</span></div><div class="stars">★★★★★</div><p>Travel-friendly diet templates. No more “off track”.</p></div>
+        <div class="review"><div class="name">Zaid K. <span class="state">| J&K</span></div><div class="stars">★★★★★</div><p>Winter bulk cleaned up. Stronger, not fluffier.</p></div>
+        <div class="review"><div class="name">Aarav P. <span class="state">| Himachal</span></div><div class="stars">★★★★★</div><p>Hill town steps + home workouts—still great results.</p></div>
+        <div class="review"><div class="name">Naina M. <span class="state">| MP</span></div><div class="stars">★★★★★</div><p>Desk job blueprint = neck pain gone, posture improved.</p></div>
+        <div class="review"><div class="name">Devika R. <span class="state">| Chhattisgarh</span></div><div class="stars">★★★★★</div><p>Food variety allowed—no boring meals, still fat loss.</p></div>
+        <div class="review"><div class="name">Kabir S. <span class="state">| Bihar</span></div><div class="stars">★★★★★</div><p>Beginner-friendly form tips. Confidence back.</p></div>
+        <div class="review"><div class="name">Tanvi L. <span class="state">| Assam</span></div><div class="stars">★★★★★</div><p>Stamina + strength up. Loved voice-note coaching.</p></div>
       </div>
     </section>
 
@@ -217,13 +227,14 @@
           <h4>Yashwanth</h4>
           <p class="muted">Certified Personal Trainer • Diet Nutritionist • Fitness Lifestyle Coach</p>
           <ul class="clean">
-            <li>JR MR INDIA 2024</li>
-            <li>50+ bodybuilding titles</li>
-            <li>7 years experience • Trained 200+ clients</li>
-            <li>Age 19 • Built FITxYASH to make elite coaching accessible</li>
+            <li>JR MR INDIA 2024 • 50+ bodybuilding titles</li>
+            <li>7 years of coaching experience • Trained 200+ clients in person</li>
+            <li>Science-first, habit-focused methods that fit your lifestyle</li>
+            <li>Mission: make elite transformation accessible & affordable</li>
           </ul>
-          <div style="margin-top:10px;display:flex;gap:10px">
-            <a class="btn" href="#confirm">Start with UD30 @ ₹499</a>
+          <p>Whether you’re starting fresh, returning after a break, or chasing a stage-ready look, I’ll guide you step by step—training, nutrition, recovery, and mindset. Zero fluff. Only results.</p>
+          <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn" href="#confirm">Join Now — ₹499</a>
             <a class="btn ghost" href="https://wa.me/919344705753" target="_blank" rel="noopener">Chat on WhatsApp</a>
           </div>
         </div>
@@ -233,65 +244,36 @@
     <!-- Payment Confirmation (AFTER PAYMENT ONLY) -->
     <section id="confirm" class="section">
       <h3>Payment Confirmation</h3>
-      <p class="lead">Already completed the payment? Fill this to verify. <b>Screenshot & Ref.No are mandatory</b>. After success, you’ll be auto-redirected to WhatsApp.</p>
+      <p class="lead"><b>AFTER payment</b>, upload your screenshot & reference number. On success, we’ll email your details and auto-redirect to WhatsApp.</p>
 
       <div class="confirm">
         <form id="fxForm" enctype="multipart/form-data">
           <div class="grid-2">
-            <div>
-              <label>Full Name *</label>
-              <input name="name" type="text" required placeholder="Your Name">
-            </div>
-            <div>
-              <label>Email *</label>
-              <input name="email" type="email" required placeholder="you@email.com">
-            </div>
+            <div><label>Full Name *</label><input name="name" type="text" required placeholder="Your Name"></div>
+            <div><label>Email *</label><input name="email" type="email" required placeholder="you@email.com"></div>
           </div>
-
           <div class="grid-2">
-            <div>
-              <label>Phone (WhatsApp) *</label>
-              <input name="phone" type="tel" required placeholder="+91XXXXXXXXXX">
-            </div>
-            <div>
-              <label>Program *</label>
+            <div><label>Phone (WhatsApp) *</label><input name="phone" type="tel" required placeholder="+91XXXXXXXXXX"></div>
+            <div><label>Program *</label>
               <select name="program" required>
-                <option value="UD30">UD30 — 30 Day Program</option>
-                <option value="Fat Loss Accelerator">Fat Loss Accelerator</option>
-                <option value="Lean Muscle Gain">Lean Muscle Gain</option>
-                <option value="Body Recomp">Body Recomp</option>
+                <option value="UD30">UD30 — Ultimate 30-Day</option>
+                <option>Fat Loss Accelerator</option><option>Lean Muscle Gain</option><option>Body Recomp</option>
               </select>
             </div>
           </div>
-
-          <div class="grid-3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
-            <div>
-              <label>Amount Paid (₹) *</label>
-              <input name="amount" type="number" min="1" step="1" required placeholder="499">
-            </div>
-            <div>
-              <label>Payment Mode *</label>
-              <select name="mode" required>
-                <option>UPI</option><option>Card</option><option>NetBanking</option><option>Wallet</option>
-              </select>
-            </div>
-            <div>
-              <label>Payment Ref. No *</label>
-              <input name="payment_ref" type="text" required placeholder="UPI/Txn ID">
+          <div class="grid-2">
+            <div><label>Amount Paid (₹) *</label><input name="amount" type="number" min="1" step="1" required value="499"></div>
+            <div><label>Payment Mode *</label>
+              <select name="mode" required><option>UPI</option><option>Card</option><option>NetBanking</option><option>Wallet</option></select>
             </div>
           </div>
-
-          <label>Upload Payment Screenshot (PNG/JPG, max 10MB) *</label>
-          <input name="screenshot" type="file" accept="image/*" required>
-          <div class="note">Note: Submission will work only if screenshot + reference number are provided.</div>
-
-          <label>Notes (optional)</label>
-          <textarea name="message" rows="3" placeholder="Any notes to mentor…"></textarea>
-
-          <!-- hidden meta -->
+          <div class="grid-2">
+            <div><label>Payment Ref. No *</label><input name="payment_ref" type="text" required placeholder="UPI/Txn ID"></div>
+            <div><label>Upload Payment Screenshot (PNG/JPG, max 10MB) *</label><input name="screenshot" type="file" accept="image/*" required></div>
+          </div>
+          <label>Notes (optional)</label><textarea name="message" rows="3" placeholder="Any notes to mentor…"></textarea>
           <input type="hidden" name="_subject" value="FITxYASH — Payment Confirmation">
           <input type="hidden" name="_gotcha">
-
           <button class="btn" id="submitBtn" type="submit">Submit & Continue to WhatsApp</button>
           <div id="statusMsg" class="note" style="margin-top:8px"></div>
         </form>
@@ -300,29 +282,38 @@
 
     <footer class="center">
       <div>© <span id="yr"></span> FITxYASH • All Rights Reserved</div>
-      <div class="tiny">By submitting you agree that you’ve completed the payment and provided true details for verification.</div>
+      <div class="tiny">By submitting you confirm you’ve completed the payment and shared true details for verification.</div>
     </footer>
   </div>
 
 <script>
-  // ====== CONFIG (YOUR LIVE VALUES) ======
+  // ====== CONFIG ======
   const FORM_ENDPOINT = "https://formspree.io/f/xnnzowkz"; // your endpoint
   const WHATSAPP_NUMBER = "919344705753"; // without '+'
-
-  // ====== HELPERS ======
-  const qs = s => document.querySelector(s);
-  const status = qs("#statusMsg");
-  const btn = qs("#submitBtn");
-  const form = qs("#fxForm");
-
+  // ====== Footer year
   document.getElementById("yr").textContent = new Date().getFullYear();
+
+  // ====== Countdown (48h from first load – change hours if needed)
+  const cd = document.getElementById("countdown");
+  const target = new Date(Date.now() + 48 * 60 * 60 * 1000);
+  const pad = n => String(n).padStart(2,"0");
+  setInterval(()=>{
+    const t = target - new Date();
+    if(t<=0){ cd.textContent = "00:00:00"; return; }
+    const h = Math.floor(t/3.6e6), m = Math.floor(t%3.6e6/6e4), s = Math.floor(t%6e4/1e3);
+    cd.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+  },1000);
+
+  // ====== Form submit (AFTER PAYMENT ONLY) → Email → WhatsApp
+  const form = document.getElementById("fxForm");
+  const status = document.getElementById("statusMsg");
+  const btn = document.getElementById("submitBtn");
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     status.style.color = "#a9acb8";
     status.textContent = "Submitting… please wait.";
 
-    // AFTER PAYMENT ONLY → enforce screenshot + ref #
     const shot = form.screenshot.files[0];
     const pref = form.payment_ref.value.trim();
     if (!shot || !pref){
@@ -344,23 +335,17 @@
       fd.append("source", "FITxYASH Website");
       fd.append("submitted_at", new Date().toISOString());
 
-      const res = await fetch(FORM_ENDPOINT, {
-        method:"POST",
-        body: fd,
-        headers: { "Accept":"application/json" }
-      });
-
+      const res = await fetch(FORM_ENDPOINT, { method:"POST", body: fd, headers: { "Accept":"application/json" }});
       if(!res.ok){
         const j = await res.json().catch(()=>({}));
         throw new Error(j.error || "Submission failed. Try again.");
       }
 
-      status.style.color = "#7af0d9";
+      status.style.color = "#7affc6";
       status.textContent = "Submitted! Redirecting to WhatsApp…";
 
-      // Build WhatsApp message
       const enc = encodeURIComponent;
-      const waMsg = 
+      const waMsg =
         `Hi Yashwanth! Payment submitted.%0A` +
         `Name: ${enc(form.name.value)}%0A` +
         `Phone: ${enc(form.phone.value)}%0A` +
@@ -381,4 +366,8 @@
 </body>
 </html>
 
+
+          
+
     
+
