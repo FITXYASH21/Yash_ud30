@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="56" viewBox="0 0 220 56">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+  <rect width="220" height="56" rx="14" fill="#0b1020"/>
+  <g transform="translate(12,8)">
+    <rect width="40" height="40" rx="12" fill="url(#g)"/>
+    <circle cx="20" cy="20" r="6" fill="#fff"/>
+  </g>
+  <text x="66" y="36" font-size="20" font-family="Inter, Arial, sans-serif" fill="#E5E7EB">YUVIFY CREATIONS</text>
+</svg>
